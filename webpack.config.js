@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const deps = require("./package.json").dependencies;
-const { FederatedTypesPlugin } = require("@module-federation/typescript");
 const {
   ModuleFederationTypesPlugin
 } = require("@cloudbeds/webpack-module-federation-types-plugin");
@@ -75,7 +74,6 @@ module.exports = {
       template: path.join(__dirname, "/src/index.html"),
     }),
     new ModuleFederationPlugin(federationConfig),
-    // new FederatedTypesPlugin({ federationConfig }),
     new ModuleFederationTypesPlugin(),
   ],
 };
