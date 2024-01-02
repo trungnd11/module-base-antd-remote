@@ -1,6 +1,6 @@
 import ErrorBoundary from "@components/errorBoundary/ErrorBoundary";
 import { lazy, Suspense } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 const Home = lazy(() => import("@pages/Home"));
 
@@ -16,4 +16,5 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const root = createRoot(document.getElementById("root") as HTMLElement);
+root.render(<App />);

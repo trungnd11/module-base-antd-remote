@@ -74,6 +74,6 @@ module.exports = {
       template: path.join(__dirname, "/src/index.html"),
     }),
     new ModuleFederationPlugin(federationConfig),
-    new ModuleFederationTypesPlugin(),
+    new ModuleFederationTypesPlugin()
   ],
 };

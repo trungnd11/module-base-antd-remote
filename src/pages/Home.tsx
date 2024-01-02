@@ -9,5 +9,5 @@ export default function Home() {
         name="Click me !"
       />
     </div>
-  )
+  );
 }
