@@ -8,8 +8,6 @@ const App = () => {
   return (
     <ErrorBoundary>
       <Suspense>
-        <h1>Hello!!</h1>
-        <h2>Welcome to your First React App...!</h2>
         <Home />
       </Suspense>
     </ErrorBoundary>

@@ -1,13 +1,11 @@
-import { SearchOutlined } from "@ant-design/icons";
-import AppButton from "../components/appButton/AppButton";
+import { SmileOutlined } from "@ant-design/icons";
+import { Result } from "antd";
 
 export default function Home() {
   return (
-    <div>
-      <AppButton
-        icon={<SearchOutlined />}
-        name="Click me !"
-      />
-    </div>
+    <Result
+      icon={<SmileOutlined />}
+      title="Great, we have done all the operations!"
+    />
   );
 }
