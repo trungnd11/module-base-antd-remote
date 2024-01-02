@@ -1,11 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const deps = require("./package.json").dependencies;
-const {
-  ModuleFederationTypesPlugin
-} = require("@cloudbeds/webpack-module-federation-types-plugin");
+const { ModuleFederationTypesPlugin } = require("@cloudbeds/webpack-module-federation-types-plugin");
 
 const federationConfig = {
   name: "container",
@@ -13,6 +12,8 @@ const federationConfig = {
   library: { type: "var", name: "container" },
   exposes: {
     "./AppButton": "./src/components/appButton/AppButton.tsx",
+    "./AppTable": "./src/components/appTable/AppTable.tsx",
+    "./Login": "./src/pages/login/Login.tsx",
   },
   shared: {
     ...deps,
@@ -61,6 +62,17 @@ module.exports = {
         test: /\.tsx?$/,
         use: "ts-loader",
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "images",
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -74,6 +86,13 @@ module.exports = {
       template: path.join(__dirname, "/src/index.html"),
     }),
     new ModuleFederationPlugin(federationConfig),
-    new ModuleFederationTypesPlugin()
+    new ModuleFederationTypesPlugin(),
   ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
+  },
 };
