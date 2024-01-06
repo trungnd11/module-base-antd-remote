@@ -21,7 +21,8 @@
       "@services/*": ["./src/services/*"],
       "@utils/*": ["./src/utils/*"],
       "@helper/*": ["./src/helper/*"],
-      "@static/*": ["./src/static/*"]
+      "@static/*": ["./src/static/*"],
+      "@store/*": ["./src/store/*"]
     }
   }
 }

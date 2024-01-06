@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const WebpackBar = require("webpackbar");
 const TerserPlugin = require("terser-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const deps = require("./package.json").dependencies;
@@ -13,6 +14,7 @@ const federationConfig = {
   exposes: {
     "./AppButton": "./src/components/appButton/AppButton.tsx",
     "./AppTable": "./src/components/appTable/AppTable.tsx",
+    "./AppModal": "./src/components/appModal/AppModal.tsx",
     "./Login": "./src/pages/login/Login.tsx",
   },
   shared: {
@@ -25,6 +27,14 @@ const federationConfig = {
     "react-dom": {
       singleton: true,
       requiredVersion: deps["react-dom"],
+    },
+    "react-router-dom": {
+      singleton: true,
+      version: deps["react-router-dom"],
+    },
+    "react-redux": {
+      singleton: true,
+      version: deps["react-router-dom"],
     },
   },
 };
@@ -87,6 +97,7 @@ module.exports = {
     }),
     new ModuleFederationPlugin(federationConfig),
     new ModuleFederationTypesPlugin(),
+    new WebpackBar()
   ],
   optimization: {
     minimizer: [
